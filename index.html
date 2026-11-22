@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>DramHub — The Whisky Companion</title>
+<meta name="description" content="DramHub — The Whisky Companion. Die iPhone-App für alle, die bei Whisky nicht aufhören können zu fragen: Distillery Lab, Geschmacks-Kompass, Dram Notes, dein Regal, Daily Dram.">
+<link rel="canonical" href="https://dramhub.app/">
+<link rel="icon" type="image/png" href="tropfen.png">
+<link rel="apple-touch-icon" href="tropfen.png">
+<meta property="og:title" content="DramHub — The Whisky Companion">
+<meta property="og:description" content="DramHub — The Whisky Companion. Die iPhone-App für alle, die bei Whisky nicht aufhören können zu fragen: Distillery Lab, Geschmacks-Kompass, Dram Notes, dein Regal, Daily Dram.">
+<meta property="og:image" content="https://dramhub.app/img/hero.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0e0b09">
+<meta name="robots" content="noindex,nofollow">
+<style>@font-face{font-family:Spectral;font-weight:400;font-style:normal;font-display:swap;src:url(fonts/spectral-400.woff) format("woff")}
+@font-face{font-family:Spectral;font-weight:500;font-style:normal;font-display:swap;src:url(fonts/spectral-500.woff) format("woff")}
+@font-face{font-family:Spectral;font-weight:600;font-style:normal;font-display:swap;src:url(fonts/spectral-600.woff) format("woff")}
+@font-face{font-family:Spectral;font-weight:400;font-style:italic;font-display:swap;src:url(fonts/spectral-400i.woff) format("woff")}
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(fonts/inter-400.woff) format("woff")}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(fonts/inter-500.woff) format("woff")}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(fonts/inter-600.woff) format("woff")}
+</style>
+<style>
+:root{--bg:#0e0b09;--bg2:#15100d;--panel:#1b1512;--line:#2e251e;--fg:#f2e7d8;--mute:#9a8a76;--amber:#d6a14b;--amber2:#a06f23;--paper:#f3eadb;--paperfg:#241b16;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55;padding:0;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--amber)}
+h1,h2,h3{font-family:Spectral,Georgia,serif;font-weight:600;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,4.2vw,40px);line-height:1.12;margin-bottom:14px}
+p{max-width:62ch;margin:0 0 14px}
+.mute{color:var(--mute)}
+.kick{font-family:Inter,sans-serif;font-weight:500;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--mute)}
+[data-l]{display:none}
+html[lang="de"] [data-l="de"],html[lang="en"] [data-l="en"]{display:revert}
+html[lang="de"] [data-l="en"],html[lang="en"] [data-l="de"]{display:none!important}
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(14,11,9,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.lock{display:flex;align-items:center;font-size:26px}
+.lock img.drop{height:1.3em;width:auto;margin-right:.22em;transform:translateY(.04em)}
+.lock img.wm{height:1em;width:auto;display:block}
+.nav{display:flex;gap:18px;align-items:center;font-size:13.5px}
+.nav a{color:var(--fg);text-decoration:none;opacity:.8}
+.nav a:hover{opacity:1}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:12px}
+.lang button{background:none;border:0;color:var(--mute);padding:5px 10px;font:inherit;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--amber);color:#1b1512}
+@media (max-width:640px){.nav a[data-l]{display:none!important}}
+/* hero */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:
+radial-gradient(1200px 500px at 50% 110%,rgba(214,161,75,.22),transparent 60%),
+radial-gradient(900px 400px at 20% 0%,rgba(160,111,35,.12),transparent 60%),var(--bg)}
+.hero .wrap{position:relative;padding-block:72px 64px;width:100%}
+.hero h1{font-size:clamp(40px,7vw,78px);line-height:1.04;max-width:14ch}
+.hero .sub{font-size:clamp(17px,2.2vw,21px);color:var(--mute);max-width:52ch;margin:22px 0 30px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:14px 22px;font:500 15px Inter,sans-serif;text-decoration:none;border:1px solid transparent;transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn.p{background:linear-gradient(180deg,#e2b060,#c08a33);color:#1b1512;box-shadow:0 8px 28px rgba(214,161,75,.25)}
+.btn.s{border-color:var(--amber2);color:var(--fg);background:rgba(214,161,75,.06)}
+.launch{margin-top:26px;font-size:13px;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.rings{position:absolute;left:50%;bottom:-240px;width:1400px;height:520px;transform:translateX(-50%);pointer-events:none}
+.rings i{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(214,161,75,.22);transform:scale(var(--s));opacity:var(--o)}
+.claim{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:18px;text-align:right}
+.claim .c1{font-family:Spectral,serif;font-size:15px;color:var(--fg);opacity:.85}
+.claim .c2{font-family:Spectral,serif;font-style:italic;color:var(--amber);font-size:14px}
+/* sections */
+section{padding-block:84px;border-top:1px solid var(--line)}
+section.alt{background:var(--bg2)}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+@media (max-width:820px){.two{grid-template-columns:1fr;gap:28px}}
+.photo{aspect-ratio:4/5;border-radius:16px;background:linear-gradient(160deg,#241b16,#15100d);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:13px;text-align:center;padding:20px}
+.quote{font-family:Spectral,serif;font-size:clamp(20px,2.6vw,26px);line-height:1.35;font-style:italic;color:var(--fg)}
+.sig{margin-top:18px;font-size:14px;color:var(--mute)}
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px}
+.w{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;min-width:0;display:flex;flex-direction:column}
+.w .kick{margin-bottom:10px;color:var(--amber)}
+.w h3{font-size:22px;line-height:1.2;margin-bottom:10px}
+.w h3 em{font-style:italic;color:var(--amber)}
+.w p{font-size:15px;color:var(--mute);margin-bottom:12px}
+.w .ex{margin-top:auto;border-left:2px solid var(--amber2);padding:8px 12px;font-family:Spectral,serif;font-style:italic;font-size:15.5px;color:var(--fg)}
+.loop{margin-top:28px;border:1px solid var(--amber2);border-radius:18px;padding:24px;background:rgba(214,161,75,.05)}
+.chain{margin:0;padding-left:26px;font-family:Spectral,serif;font-size:18px;line-height:1.5;color:var(--fg)}
+.chain li{margin-bottom:8px;padding-left:4px}
+.chain li::marker{color:var(--amber);font-family:Inter,sans-serif;font-size:13px;font-weight:600}
+.stage .phone{margin:0 auto -6px}
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.stages.four{grid-template-columns:repeat(4,1fr);gap:16px}
+@media (max-width:980px){.stages.four{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.stages.four{grid-template-columns:1fr}}
+.phone video{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.stage .kick{color:var(--amber);margin-bottom:6px}
+.stage p{min-height:0}
+@media (max-width:820px){.stages{grid-template-columns:1fr}}
+.stage{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 22px 0;overflow:hidden;min-width:0}
+.stage h3{font-size:24px;margin-bottom:8px}
+.stage p{font-size:15px;color:var(--mute)}.stage .phone{margin-top:auto}
+.phone{margin:18px auto -6px;width:min(100%,250px);aspect-ratio:720/1488;border-radius:34px 34px 0 0;border:8px solid #2a2119;border-bottom:0;background:#0a0807;overflow:hidden;color:var(--mute);font-size:12px;text-align:center}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.dist{background:linear-gradient(180deg,var(--bg2),var(--bg))}
+.dist .box{border:1px solid var(--amber2);border-radius:18px;padding:30px;background:rgba(214,161,75,.05)}
+.dist ul{margin:0 0 14px;padding-left:18px;color:var(--fg)}
+.dist li{margin-bottom:6px}
+.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.faq div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.faq b{display:block;font-family:Spectral,serif;font-weight:600;font-size:18px;margin-bottom:6px}
+.faq p{font-size:14.5px;color:var(--mute);margin:0}
+footer{padding-block:40px 60px;border-top:1px solid var(--line);font-size:13.5px;color:var(--mute)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+footer .links{display:flex;flex-wrap:wrap;gap:16px}
+footer a{color:var(--mute);text-decoration:none}
+footer img{height:22px;width:auto;opacity:.9}
+.mail{font-family:ui-monospace,Menlo,monospace;font-size:14px;color:var(--fg);user-select:all}
+
+/* Bild-Schwellen */
+.hero .bg{position:absolute;inset:0;background:url(img/hero.jpg) center/cover no-repeat;filter:saturate(.85)}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,11,9,.55),rgba(14,11,9,.78) 55%,var(--bg) 100%)}
+.sw{position:relative;border-top:1px solid var(--line);padding:0}
+.sw .bg{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;z-index:0}
+.sw .bg img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85)}
+.sw .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(14,11,9,.62) 22%,rgba(14,11,9,.66) 78%,var(--bg) 100%)}
+.sw .fg{position:relative;z-index:1;margin-top:-100vh;margin-top:-100svh;padding-block:22vh 18vh}
+.sw .card{background:rgba(14,11,9,.72);backdrop-filter:blur(6px);border:1px solid rgba(214,161,75,.25);border-radius:20px;padding:34px;max-width:720px}
+@media (max-width:640px){.sw .card{padding:24px 20px}}
+.sw .two{align-items:start}
+.photo img{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block}
+.photo.has{padding:0;overflow:hidden;background:none}
+.presse{position:relative;overflow:hidden}
+.presse .pbg{position:absolute;inset:0;background:url(img/shore.jpg) center/cover no-repeat;opacity:.35;filter:saturate(.8)}
+.presse .pbg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg2) 35%,rgba(21,16,13,.4))}
+.presse .wrap{position:relative}
+.w.wide{grid-column:1/-1;flex-direction:row;gap:28px;align-items:center;flex-wrap:wrap}
+.w.wide>div{flex:1 1 320px;min-width:0}
+@media (prefers-reduced-motion:reduce){.sw .bg{position:relative;height:46vh}.sw .fg{margin-top:0;padding-block:48px}}
+.todo{display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;border:1px dashed var(--amber2);color:var(--amber);border-radius:4px;padding:2px 7px;margin-left:8px;vertical-align:middle}
+</style>
+
+<header class="gut"><div class="wrap">
+  <a href="#top" class="lock" aria-label="DramHub"><img class="drop" src="tropfen.png" alt=""><img class="wm" src="wortmarke.svg" alt="DramHub"></a>
+  <nav class="nav">
+    <a href="#reise" data-l="de">Die Reise</a><a href="#reise" data-l="en">The journey</a>
+    <a href="#app" data-l="de">Die App</a><a href="#app" data-l="en">The app</a>
+    <a href="#brennereien" data-l="de">Für Brennereien</a><a href="#brennereien" data-l="en">For distilleries</a>
+    <a href="#presse" data-l="de">Presse</a><a href="#presse" data-l="en">Press</a>
+    <div class="lang"><button id="bde" onclick="setLang('de')">DE</button><button id="ben" onclick="setLang('en')">EN</button></div>
+  </nav>
+</div></header>
+
+<section class="hero gut" id="top" style="border-top:0">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="rings" aria-hidden="true"><i style="--s:.55;--o:.9"></i><i style="--s:.72;--o:.6"></i><i style="--s:.88;--o:.35"></i><i style="--s:1;--o:.18"></i></div>
+  <div class="wrap">
+    <div class="kick" style="margin-bottom:18px">The Whisky Companion</div>
+    <h1 data-l="de">Für alle, die bei Whisky nicht aufhören können zu fragen.</h1>
+    <h1 data-l="en">For everyone who cannot stop asking questions about whisky.</h1>
+    <p class="sub" data-l="de">Eine iPhone-App, die dich auf deiner Whiskyreise begleitet — vom ersten Glas bis zum vollen Regal. Ein Lab, in dem du deinen eigenen Whisky kreierst. Notizen, die zeigen, was dir wirklich schmeckt. Dein Regal, jede Brennerei Schottlands. Und eine Lektion am Tag.</p>
+    <p class="sub" data-l="en">An iPhone app that walks the whisky journey with you — from the first glass to a full shelf. A Lab where you create your own whisky. Notes that show what you really like. Your shelf, every distillery in Scotland. And one lesson a day.</p>
+    <div class="btns">
+      <a class="btn p" href="mailto:david@dramhub.app?subject=TestFlight&body=Hi%20David%2C%20I%27d%20like%20to%20join%20the%20DramHub%20TestFlight."><span data-l="de">TestFlight anfragen</span><span data-l="en">Join the TestFlight</span> →</a>
+      <a class="btn s" href="#app"><span data-l="de">Was DramHub ist</span><span data-l="en">What DramHub is</span></a>
+    </div>
+    <div class="launch"><span data-l="de">Im App Store ab Frühjahr 2027</span><span data-l="en">On the App Store from spring 2027</span> </div>
+  </div>
+  <div class="claim"><div class="c1">Whisky has no bottom.</div><div class="c2">Go deeper ↓</div></div>
+</section>
+
+<section class="sw" id="reise"><div class="bg" aria-hidden="true"><img src="img/washback.jpg" alt=""></div>
+<div class="fg gut"><div class="wrap two">
+  <div class="card">
+    <div class="kick" style="margin-bottom:14px"><span data-l="de">Die Reise</span><span data-l="en">The journey</span></div>
+    <h2 data-l="de">Es begann an einem Washback.</h2>
+    <h2 data-l="en">It began at a washback.</h2>
+    <p class="quote" data-l="de">„Es begann auf dem Boden einer Brennerei. Das erste Mal, dass ich mich über einen Washback beugte und Banane und viel zu viel CO₂ in die Nase bekam; das erste Mal, dass ich die Brennblasen pfeifen hörte; das erste Mal, dass ich den Angels’ Share eines Warehouse einatmete.“</p>
+    <p class="quote" data-l="en">“It began on a distillery floor. The first time I leaned over a washback and got banana and far too much CO₂ up my nose; the first time I heard the stills whistle; the first time I breathed in the angels’ share of a warehouse.”</p>
+    <p data-l="de">Seit diesem Tag wollte ich alles verstehen — die Prozesse, die Geschichte, warum ein Haus so anders schmeckt als sein Nachbar — und ich wollte nichts davon vergessen. Siebenundsiebzig Brennereien später waren die Notizbücher zu viel für Notizbücher. Also habe ich DramHub gebaut: den Begleiter, den ich mir immer in der Tasche gewünscht habe — für den Anfänger, der gerade seinen ersten Islay probiert hat, und für alle, die schon lange unterwegs sind.</p>
+    <p data-l="en">From that day on I wanted to understand everything — the processes, the history, why one house tastes nothing like its neighbour — and I did not want to forget any of it. Seventy-seven distilleries later, the notebooks had become too much for notebooks. So I built DramHub: the companion I had always wanted in my pocket — for the beginner who has just had a first Islay, and for everyone who has been on the road for a long time.</p>
+    <div class="sig">David Lopez · <span data-l="de">Gründer, DramHub</span><span data-l="en">Founder, DramHub</span></div>
+  </div>
+  <div class="photo has"><img src="img/david.jpg" alt="David in einem Warehouse"></div>
+</div></div></section>
+
+<section class="gut alt" id="app"><div class="wrap">
+  <div class="kick" style="margin-bottom:14px"><span data-l="de">Warum DramHub</span><span data-l="en">Why DramHub</span></div>
+  <h2 data-l="de">Vieles gibt es nur hier. Und alles greift ineinander.</h2>
+  <h2 data-l="en">Much of this exists nowhere else. And all of it connects.</h2>
+  <p class="mute" style="margin-bottom:36px" data-l="de">Niemand sonst lässt dich deinen eigenen Whisky machen. Niemand hat einen Daily Dram. Niemand sagt dir vor dem ersten Schluck, wie eine Flasche schmecken wird. Und bei DramHub bleibt nichts davon für sich: Der Whisky, den du im Lab baust, führt zu einer echten Flasche. Die Flasche landet in deinem Regal. Deine Notiz dazu verrät etwas über deinen Gaumen. Und daraus entsteht die nächste Empfehlung. Alles aus einem Guss.</p>
+  <p class="mute" style="margin-bottom:36px" data-l="en">Nobody else lets you make your own whisky. Nobody has a Daily Dram. Nobody tells you how a bottle will taste before the first sip. And in DramHub none of it stands alone: the whisky you build in the Lab leads to a real bottle. The bottle lands on your shelf. Your note on it says something about your palate. And out of that comes the next recommendation. All of a piece.</p>
+
+  <div class="why">
+    <div class="w"><div class="kick">Distillery Lab</div>
+      <h3 data-l="de">Kreiere deinen eigenen Whisky. Von der Gerste bis ins Glas — alles in deiner Hand.</h3><h3 data-l="en">Create your own whisky. From the barley to the glass, every decision is yours.</h3>
+      <p data-l="de">Du entscheidest, wie in einer Brennerei entschieden wird: Wie viel Torf? Wie lange gärt die Maische? Welche Form hat die Brennblase, wo setzt du den Schnitt, welches Fass, wie viele Jahre? Mit jeder Antwort verändert sich dein Whisky vor deinen Augen. Und am Ende sagt dir DramHub, welche echte Flasche deinem am nächsten kommt.</p>
+      <p data-l="en">You make the decisions a distillery makes: how much peat? How long does the wash ferment? What shape of still, where do you take the cut, which cask, how many years? With every answer your whisky changes in front of you. And at the end DramHub tells you which real bottle comes closest to yours.</p>
+      <div class="ex" data-l="de">Tausch den Kondensator gegen alte Worm Tubs, und dein Whisky wird spürbar fleischiger. Du siehst es, bevor du es schmeckst.</div>
+      <div class="ex" data-l="en">Swap the condenser for old-style worm tubs and your whisky turns noticeably meatier. You see it before you taste it.</div></div>
+
+    <div class="w"><div class="kick">Geschmacks-Kompass</div>
+      <h3 data-l="de">Sag, was dir schmeckt. Erhalte drei echte Flaschen.</h3><h3 data-l="en">Say what you like. Get three real bottles.</h3>
+      <p data-l="de">Du musst kein Kenner sein. Vier Fragen, so wie man sie am Tresen stellen würde: Magst du Rauch? Eher Vanille oder eher Trockenfrüchte? Jung oder gereift? Sanft oder kräftig? „Weiß ich nicht“ geht auch. Am Ende stehen drei echte Flaschen aus drei Brennereien vor dir — und dazu die Geschichte, warum sie so schmecken.</p>
+      <p data-l="en">You don’t need to be an expert. Four questions, the way you’d ask them at the bar: do you like smoke? Vanilla or dried fruit? Young or matured? Gentle or bold? “Don’t know” is fine too. At the end, three real bottles from three distilleries stand in front of you — along with the story of why they taste the way they do.</p>
+      <div class="ex" data-l="de">Leicht rauchig, Nüsse und Trockenfrüchte, gern gereift? Dann kommt Highland Park 18 — und zwei Flaschen, die du vermutlich noch nicht kennst.</div>
+      <div class="ex" data-l="en">Lightly smoky, nuts and dried fruit, well matured? Then it’s Highland Park 18 — and two bottles you probably haven’t met yet.</div></div>
+
+    <div class="w"><div class="kick">Dram Notes</div>
+      <h3 data-l="de">Drei Stimmen zu jeder Flasche: die Vorhersage, die Verkoster, du.</h3><h3 data-l="en">Three voices on every bottle: the prediction, the tasters, you.</h3>
+      <p data-l="de">Bevor du das Glas hebst, sagt dir DramHub, was du zu erwarten hast. Dann liest du, was erfahrene Verkoster darin gefunden haben. Und dann zählt nur noch, was du schmeckst. Die drei Stimmen stehen nebeneinander — und genau dort, wo du abweichst, lernst du dich kennen. Mit jeder Note wird das Bild deines Gaumens schärfer. Und wenn ein Tasting ansteht, ist DramHub dabei: Line-up anlegen, jeden Dram einfangen, die Notizen in Ruhe nachtragen.</p>
+      <p data-l="en">Before you lift the glass, DramHub tells you what to expect. Then you read what experienced tasters found in it. And then all that counts is what you taste. The three voices sit side by side — and exactly where you differ is where you get to know yourself. With every note the picture of your palate sharpens. And when a tasting is coming up, DramHub comes along: set up the line-up, capture every dram, write the notes at leisure afterwards.</p>
+      <div class="ex" data-l="de">„Du findest mehr Honig als die Verkoster. Das kommt vom Fass.“ Dein Gaumen, in Worten.</div>
+      <div class="ex" data-l="en">“You find more honey than the tasters do. That comes from the cask.” Your palate, in words.</div></div>
+
+    <div class="w"><div class="kick" data-l="de">Dein Regal</div><div class="kick" data-l="en">Your shelf</div>
+      <h3 data-l="de">Flasche zeigen. Fertig.</h3><h3 data-l="en">Show the bottle. Done.</h3>
+      <p data-l="de">Halte die Kamera auf die Flasche, mehr braucht es nicht. In wenigen Sekunden liest DramHub Brennerei, Alter, Stärke, Fass und Abfüller vom Etikett — auch bei unabhängigen Abfüllungen und Samples. Die Flasche steht danach freigestellt in deinem Regal, mit ihrem Foto und allem, was du ihr mitgeben willst.</p>
+      <p data-l="en">Point the camera at the bottle, that is all it takes. Within seconds DramHub reads distillery, age, strength, cask and bottler from the label — independent bottlings and samples included. Afterwards the bottle stands cut out on your shelf, with its photo and anything you want to add.</p>
+      <div class="ex" data-l="de">In Sekunden gescannt und fotografiert. Der Abend gehört dem Whisky, nicht dem Tippen.</div>
+      <div class="ex" data-l="en">Scanned and photographed in seconds. The evening belongs to the whisky, not to typing.</div></div>
+
+    <div class="w"><div class="kick" data-l="de">Empfehlungen</div><div class="kick" data-l="en">Recommendations</div>
+      <h3 data-l="de">Nicht die beliebteste Flasche, sondern <em>deine</em> nächste.</h3><h3 data-l="en">Not the most popular bottle, but <em>your</em> next one.</h3>
+      <p data-l="de">Bestsellerlisten kennen dich nicht. DramHub kennt dein Regal und deinen Gaumen — und empfiehlt dir deshalb drei Dinge, die sonst niemand kann: die Flasche, die dir noch fehlt. Die passende aus deinem Regal für heute Abend. Und die Ecke, in die du schon lange nicht mehr geschaut hast.</p>
+      <p data-l="en">Bestseller lists don’t know you. DramHub knows your shelf and your palate — and so it can recommend three things nobody else can: the bottle you’re still missing. The one from your shelf that fits tonight. And the corner you haven’t looked into for a long while.</p>
+      <div class="ex" data-l="de">„Viel Rauch, viel Sherry — und seit Monaten kein junger Bourbonfass-Malt. Probier doch mal …“</div>
+      <div class="ex" data-l="en">“Plenty of smoke, plenty of sherry — and not a young bourbon-cask malt in months. Why not try …”</div></div>
+
+    <div class="w"><div class="kick">Daily Dram</div>
+      <h3 data-l="de">Eine Lektion am Tag. Jede Brennerei. Über 130 ausführliche Artikel.</h3><h3 data-l="en">One lesson a day. Every distillery. Over 130 deep articles.</h3>
+      <p data-l="de">Kein Kurs, sondern ein Ritual: jeden Tag eine kurze Lektion, drei Minuten, fertig. Wer mehr will, geht weiter — ins Porträt der Brennerei, in den ausführlichen Artikel, ins Lab. Jede schottische Malt-Destillerie hat hier ihr eigenes Porträt — dazu die verlorenen Brennereien und die unabhängigen Abfüller.</p>
+      <p data-l="en">Not a course, but a ritual: one short lesson a day, three minutes, done. If you want more, you go on — into the distillery’s portrait, into the deep article, into the Lab. Every Scottish malt distillery has its own portrait here — along with the lost distilleries and the independent bottlers.</p>
+      <div class="ex" data-l="de">Warum schmeckt Caol Ila so anders als Lagavulin, obwohl beide auf derselben Insel fast dasselbe Malz brennen? Heute Abend weißt du es.</div>
+      <div class="ex" data-l="en">Why does Caol Ila taste so different from Lagavulin, when both distil almost the same malt on the same island? Tonight you’ll know.</div></div>
+  </div>
+    <div class="w wide"><div><div class="kick">Dram Signature</div>
+      <h3 data-l="de">Einzigartig wie ein Single Cask: dein Whisky-Ich.</h3><h3 data-l="en">As unique as a single cask: your whisky self.</h3></div>
+      <div><p data-l="de">Alles, was du liest, verkostest und sammelst, reift in einem Fass, das deine persönlichen Erfahrungen enthält. Lesen reift dich. Verkosten färbt dich. Sammeln baut dich. Das Etikett dazu kannst du teilen — es ist das persönlichste Stück Papier, das es über deinen Whisky gibt.</p>
+      <p data-l="en">Everything you read, taste and collect matures in a cask that holds your personal experiences. Reading matures you. Tasting colours you. Collecting builds you. You can share the label — it is the most personal piece of paper there is about your whisky.</p>
+      <div class="ex" data-l="de">„Sherry-geprägt, mit tiefem Rauch im Finish. Zu Hause auf Islay und in der Speyside. Reifung seit August 2026.“</div>
+      <div class="ex" data-l="en">“Sherry-led, with deep smoke on the finish. At home on Islay and in Speyside. Maturing since August 2026.”</div></div></div>
+  </div>
+
+  <div class="stages four" style="margin-top:44px">
+    <div class="stage"><div class="kick">Distillery Lab</div><p data-l="de">Du entscheidest. Der Whisky reagiert.</p><p data-l="en">You decide. The whisky responds.</p>
+      <div class="phone"><video autoplay muted loop playsinline preload="metadata" poster="img/lab_poster.jpg"><source src="img/lab.webm" type="video/webm"><source src="img/lab.mp4" type="video/mp4"></video></div></div>
+    <div class="stage"><div class="kick">Geschmacks-Kompass</div><p data-l="de">Vier Antworten, drei Flaschen.</p><p data-l="en">Four answers, three bottles.</p>
+      <div class="phone"><img src="img/kompass.jpg" alt=""></div></div>
+    <div class="stage"><div class="kick">Quick Capture</div><p data-l="de">Live vom Etikett gelesen — auch eine unabhängige Abfüllung.</p><p data-l="en">Read live from the label — an independent bottling included.</p>
+      <div class="phone"><video autoplay muted loop playsinline preload="metadata" poster="img/scan_poster.jpg"><source src="img/scan.webm" type="video/webm"><source src="img/scan.mp4" type="video/mp4"></video></div></div>
+    <div class="stage"><div class="kick" data-l="de">Dein Regal</div><div class="kick" data-l="en">Your shelf</div><p data-l="de">Deine Flaschen, wie sie stehen.</p><p data-l="en">Your bottles, as they stand.</p>
+      <div class="phone"><img src="img/regal.jpg" alt=""></div></div>
+  </div></section>
+
+<section class="sw" id="essenz"><div class="bg" aria-hidden="true"><img src="img/dunnage.jpg" alt=""></div>
+<div class="fg gut"><div class="wrap">
+  <div class="card">
+    <div class="kick" style="margin-bottom:12px"><span data-l="de">Die Essenz</span><span data-l="en">The essence</span></div>
+    <h2 data-l="de">Sechs Schritte, die ineinandergreifen.</h2><h2 data-l="en">Six steps that feed each other.</h2>
+    <ol class="chain">
+      <li><span data-l="de">Im Lab baust du deinen eigenen Whisky.</span><span data-l="en">In the Lab you build your own whisky.</span></li>
+      <li><span data-l="de">DramHub sagt dir, wie er schmecken wird — und welche echte Flasche ihm am nächsten kommt.</span><span data-l="en">DramHub tells you how it will taste — and which real bottle comes closest.</span></li>
+      <li><span data-l="de">Diese Flasche stellst du in dein Regal.</span><span data-l="en">You put that bottle on your shelf.</span></li>
+      <li><span data-l="de">Du trinkst sie und schreibst deine Note. Daran lernt DramHub deinen Gaumen kennen.</span><span data-l="en">You drink it and write your note. That is how DramHub gets to know your palate.</span></li>
+      <li><span data-l="de">Aus Regal und Gaumen entsteht deine nächste Empfehlung.</span><span data-l="en">From shelf and palate comes your next recommendation.</span></li>
+      <li><span data-l="de">Die Lektion des Tages erklärt dir, warum das alles zusammenhängt — und dann geht es von vorn los.</span><span data-l="en">The day’s lesson explains why it all connects — and then it starts again.</span></li>
+    </ol>
+    <p class="mute" style="margin:14px 0 0" data-l="de">Dahinter steckt eine einzige Sprache für Geschmack, dieselben acht Achsen in jedem Teil der App. Deshalb greift alles ineinander — und deshalb gibt es das so nirgendwo sonst.</p>
+    <p class="mute" style="margin:14px 0 0" data-l="en">Underneath it all is one single language for flavour, the same eight axes in every part of the app. That is why everything connects — and why you won’t find this anywhere else.</p>
+  </div>
+
+</div></div></section>
+
+<section class="sw" id="brennereien"><div class="bg" aria-hidden="true"><img src="img/stills.jpg" alt=""></div>
+<div class="fg gut"><div class="wrap">
+  <div class="card">
+    <div class="kick" style="margin-bottom:14px">For distilleries</div>
+    <h2>Your house, your photographs.</h2>
+    <p>Every Scottish malt distillery has a portrait in DramHub — researched and written by one person who has stood in seventy-seven of your stillhouses. The portrait appears either way, in the same honest tone for every house. What changes with your participation: your images and your corrections are in it.</p>
+    <ul>
+      <li><strong>Three photographs</strong> — exterior · stills · one of your choosing. Landscape 3:2, 2400 × 1600 px or larger, JPG.</li>
+      <li><strong>One page</strong> — the photo release, signed. Reply to the email with the files and it is done.</li>
+      <li><strong>No cost, no listing fees, no placements.</strong> Factual corrections welcome at any time.</li>
+    </ul>
+    <div class="btns"><a class="btn s" href="release.pdf">Photo release (PDF) <span class="todo">bald</span></a><a class="btn s" href="mailto:david@dramhub.app?subject=DramHub%20distillery%20portrait">david@dramhub.app</a></div>
+  </div>
+</div></div></section>
+
+<section class="gut alt presse" id="presse"><div class="pbg" aria-hidden="true"></div><div class="wrap two">
+  <div>
+    <div class="kick" style="margin-bottom:14px"><span data-l="de">Presse</span><span data-l="en">Press</span></div>
+    <h2 data-l="de">Zum Weitergeben.</h2><h2 data-l="en">For passing on.</h2>
+    <p data-l="de">Wortmarke, App-Icon, sechs Screens, ein 30-Sekunden-Video und ein Fact-Sheet auf Deutsch und Englisch — in einem ZIP.</p>
+    <p data-l="en">Wordmark, app icon, six screens, a 30-second video and a fact sheet in English and German — in one ZIP.</p>
+    <div class="btns"><a class="btn s" href="press.zip"><span data-l="de">Presse-Kit laden</span><span data-l="en">Download press kit</span> <span class="todo">bald</span></a></div>
+  </div>
+  <div class="faq">
+    <div><b>DramHub</b><p>The Whisky Companion · iPhone · <span data-l="de">Frühjahr 2027</span><span data-l="en">spring 2027</span></p></div>
+    <div><b data-l="de">Gründer</b><b data-l="en">Founder</b><p>David Lopez · München · david@dramhub.app</p></div>
+  </div>
+</div></section>
+
+<section class="gut"><div class="wrap">
+  <div class="kick" style="margin-bottom:14px"><span data-l="de">Fünf Fragen</span><span data-l="en">Five questions</span></div>
+  <div class="faq">
+    <div><b data-l="de">Nur Scotch?</b><b data-l="en">Scotch only?</b><p data-l="de">Zum Start ja — jede schottische Malt-Destillerie. Die Reise geht weiter.</p><p data-l="en">At launch, yes — every Scottish malt distillery. The journey continues.</p></div>
+    <div><b>Android?</b><p data-l="de">DramHub ist für iPhone gebaut. Android steht nicht auf dem Plan für den Start.</p><p data-l="en">DramHub is built for iPhone. Android is not on the plan for launch.</p></div>
+    <div><b data-l="de">Was kostet es?</b><b data-l="en">What does it cost?</b><p data-l="de">Der Kern ist frei. Premium — das ganze Lab und jedes Archiv — 5,99 € im Monat oder 49,99 € im Jahr.</p><p data-l="en">The core is free. Premium — the whole Lab and every archive — €5.99 a month or €49.99 a year.</p></div>
+    <div><b data-l="de">Wo liegen meine Daten?</b><b data-l="en">Where is my data?</b><p data-l="de">Auf deinem Gerät und in deiner eigenen iCloud. Nicht bei uns.</p><p data-l="en">On your device and in your own iCloud. Not with us.</p></div>
+    <div><b data-l="de">Wann?</b><b data-l="en">When?</b><p data-l="de">Frühjahr 2027 im App Store. Vorher über TestFlight — schreib uns.</p><p data-l="en">Spring 2027 on the App Store. Before that via TestFlight — write to us.</p></div>
+  </div>
+</div></section>
+
+<footer class="gut"><div class="wrap">
+  <img src="wortmarke.svg" alt="DramHub">
+  <div class="links">
+    <a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+    <span class="mail">david@dramhub.app</span>
+  </div>
+</div></footer>
+
+<script>
+function setLang(l){document.documentElement.lang=l;document.getElementById('bde').setAttribute('aria-pressed',l==='de');document.getElementById('ben').setAttribute('aria-pressed',l==='en');try{localStorage.setItem('dh-lang',l)}catch(e){}}
+(function(){let l=null;try{l=localStorage.getItem('dh-lang')}catch(e){}
+if(!l){l=(navigator.language||'en').toLowerCase().startsWith('de')?'de':'en'}setLang(l);})();
+</script>
+
+</body></html>
